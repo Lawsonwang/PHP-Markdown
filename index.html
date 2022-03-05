@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Markdown Test</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="markdown-palettes.min.js"></script>
+    <link rel="stylesheet" href="markdown-palettes.css">
+</head>
+
+<body>
+    <div style="height: 400px; width: 50%; /*margin: 0 auto;*/">
+        <div id="editor"></div>
+    </div>
+
+    <button type="button" onclick="parse()" style="margin: 10px;">Parse</button>
+
+    <div id="mdbox" style="border: 1px solid; padding-left: 5px;"></div>
+
+    <script>
+        var editor = new MarkdownPalettes('#editor');
+        $.get("./source/article1.md", function (response, status, xhr) {
+            $("#mdbox").html(marked.parse(response));
+            editor.content = response;
+        });
+        function parse() {
+            $("#mdbox").html(marked.parse(editor.content));
+        }
+    </script>
+</body>
+</html>
